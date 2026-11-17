@@ -1,121 +1,173 @@
-# 📅 BIT Holiday Calendar (2026–2027)
+# 📅 BIT Holiday Calendar (2026–2030)
+### Bannari Amman Institute of Technology, Sathyamangalam
 
-A fast, modern, mobile-first Progressive Web App (PWA) built for students of **Bannari Amman Institute of Technology (BIT)**. It replaces PDF circulars with a phone-native calendar experience featuring GP leaves, public holidays, mess closures, half-day AN indicators, and 1-tap `.ics` calendar sync.
-
----
-
-## ✨ Features
-
-- **📱 Mobile-First Native Experience:** Designed specifically for 360–420px mobile screens (iPhone / Android) with iOS/Google Calendar aesthetics, smooth bottom sheets, and touch swipe gestures.
-- **🗓️ 7-Column Month Grid:** Smooth swipe navigation between months (June 2026 – May 2027), quick month jumper dialog, and a 1-tap **"Today"** button.
-- **🎨 Color-Coded Schedule & Legend:**
-  - 🔴 **Red:** Public Holiday (single day)
-  - 🔵 **Blue:** GP (General Permission) Leave period
-  - 🟠 **Orange:** Festival day during a GP period (with festival badge)
-  - ⚪ **Striped:** Hostel Mess Closure
-  - ◪ **Diagonal Split + "AN" Badge:** Marks afternoon half-days (leave begins after 1:00 PM).
-- **📋 Bottom Sheet Modal:** Tap any date to view the full date, leave duration, festival details, and mess closure timings, with quick "Add to Calendar" and "Share" buttons.
-- **⏳ Hero & Upcoming View:**
-  - **"Next Leave"** countdown card right on the home screen.
-  - Switch to **Upcoming List** with "X days left" countdown badges.
-- **🔍 Search & Filter Chips:** Real-time filtering by *All*, *Holidays*, *GP Leave*, and *Mess Closed*, plus instant keyword search.
-- **🌓 Dark Mode:** Automatically syncs with your phone's dark/light mode preference, with a manual Sun/Moon toggle.
-- **📥 Sync to Phone Calendar (.ics):** Export all events (or individual events) directly as an `.ics` file compatible with Google Calendar, Apple Calendar, and Microsoft Outlook.
-- **🔔 Reminders:** Built-in Web Notification reminder to alert you before an upcoming GP leave or holiday.
-- **⚡ 100% Offline PWA:** Installable to your phone's home screen via `manifest.json` and `sw.js`.
+A mobile-first Progressive Web App (PWA) built with **React + Vite** for students and faculty of **Bannari Amman Institute of Technology (BIT)**. It replaces static circulars and PDF lists with a phone-native calendar experience (Google Calendar / iOS style) covering **every month from January 2026 to December 2030**.
 
 ---
 
-## 🚀 How to Run Locally
+## 🚀 Quick Start (Local Run)
 
-Because this project uses vanilla HTML, CSS, and JavaScript with **zero build step**, you can run it immediately with any local server:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-### Option A: Using Python (Recommended)
-Open a terminal in the project folder and run:
-```bash
-python -m http.server 8080
-```
-Then open your browser at **`http://localhost:8080`**.
+2. **Start the local development server:**
+   ```bash
+   npm run dev
+   ```
+   Open **`http://localhost:5173`** in your browser.
 
-### Option B: Using Node.js
-If you have Node.js installed, run:
-```bash
-npx serve .
-# or
-npx http-server -p 8080
-```
-
-### Option C: Using VS Code Live Server
-1. Open the project folder in **Visual Studio Code**.
-2. Right-click on `index.html` and click **"Open with Live Server"**.
+3. **Build for production:**
+   ```bash
+   npm run build
+   npm run preview
+   ```
 
 ---
 
-## 🛠️ How to Update `data.js` for Next Academic Year
+## 🔐 College Authentication & Security Rules
 
-All calendar data is isolated inside `data.js`. You do not need to touch any code in `app.js` or `index.html`.
+### Required Sign-In
+- Access is strictly restricted to verified **`@bitsathy.ac.in`** Google Workspace accounts.
+- The entry screen presents the college crest and a **"Sign in with your college Google account"** button. Nothing else is visible until authenticated.
+- The Google Auth Provider is configured with `{ hd: "bitsathy.ac.in", prompt: "select_account" }` to guide Google to show college accounts.
+- **Client-Side Enforcement:** After sign-in, the app verifies that `user.email` ends with `@bitsathy.ac.in` and `user.emailVerified === true`. If a non-college account is selected, it immediately signs the user out and displays:
+  > *"Please sign in with your @bitsathy.ac.in email."*
+- **Backend Enforcement (`firestore.rules`):**
+  Reads are permitted **only** when authenticated with a verified `@bitsathy.ac.in` token. Writes are permitted **only** for addresses listed in `ADMIN_EMAILS`.
 
-### 1. Update the configuration block at the top of `data.js`:
-```javascript
-const BIT_CALENDAR_CONFIG = {
-  collegeName: "Bannari Amman Institute of Technology",
-  collegeShort: "BIT",
-  academicYear: "2027–2028", // Update year label
-  startMonth: "2027-06",     // Academic year starts June
-  endMonth: "2028-05",       // Academic year ends May
-  defaultViewDate: "2027-06-01"
-};
+---
+
+## 🛠️ Step-by-Step Firebase Setup
+
+### 1. Create a Firebase Project
+1. Go to the [Firebase Console](https://console.firebase.google.com/) and click **"Add project"**.
+2. Name your project (e.g., `bit-holiday-calendar`) and continue.
+3. In your project dashboard, click the **Web icon (`</>`)** to register a web app.
+4. Name the web app and copy your `firebaseConfig` object values.
+
+### 2. Enable Google Sign-In
+1. In the Firebase Console left menu, navigate to **Build → Authentication**.
+2. Click **Get Started**, choose **Google** under Sign-in providers, and enable it.
+3. Select your support email and click **Save**.
+
+### 3. Add Authorized Domains
+1. In **Authentication → Settings → Authorized domains**, ensure the following domains are listed:
+   - `localhost`
+   - `<your-project-id>.firebaseapp.com`
+   - Your production domain (e.g. `<username>.github.io` or `<sitename>.netlify.app`).
+
+### 4. Configure Environment Variables (`.env`)
+Create a `.env` file in the project root (see `.env.example`):
+```env
+VITE_FIREBASE_API_KEY=your-api-key-from-console
+VITE_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+VITE_FIREBASE_APP_ID=your-app-id
+
+# Allowed college domain (single configuration setting)
+VITE_ALLOWED_DOMAIN=bitsathy.ac.in
+
+# Comma-separated list of college emails authorized to publish GP leaves
+VITE_ADMIN_EMAILS=admin@bitsathy.ac.in,principal@bitsathy.ac.in,studentcouncil@bitsathy.ac.in
 ```
 
-### 2. Add or update events in `BIT_CALENDAR_EVENTS`:
+### 5. Deploy Cloud Firestore Security Rules
+1. In Firebase Console, go to **Build → Firestore Database** and click **Create Database**.
+2. Deploy the rules from the project's [`firestore.rules`](file:///c:/Users/loginn/OneDrive/Documents/GP%20Callender/firestore.rules) file:
+   ```bash
+   firebase deploy --only firestore:rules
+   ```
+   Or copy the rules directly into the **Rules** tab in the Firebase Console:
+   ```javascript
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       // Authenticated @bitsathy.ac.in verified accounts can read
+       match /{document=**} {
+         allow read: if request.auth != null 
+                     && request.auth.token.email.matches('.*@bitsathy\\.ac\\.in$') 
+                     && request.auth.token.email_verified == true;
+       }
 
-#### A. Single Public Holiday:
-```javascript
-{
-  "type": "HOLIDAY",
-  "name": "Independence Day",
-  "date": "2027-08-15"
-}
-```
+       // Only college administrators can add or edit GP leaves
+       match /gps/{gpId} {
+         allow write: if request.auth != null 
+                      && request.auth.token.email_verified == true
+                      && request.auth.token.email in [
+                        'admin@bitsathy.ac.in',
+                        'studentcouncil@bitsathy.ac.in',
+                        'principal@bitsathy.ac.in',
+                        'convenor@bitsathy.ac.in'
+                      ];
+       }
+     }
+   }
+   ```
 
-#### B. GP Leave (Regular):
-```javascript
+---
+
+## 📅 Calendar Features (2026 to 2030)
+
+- **Continuous 5-Year Coverage:** Every single month from **January 2026 to December 2030** (60 months) is accessible.
+- **Swipe & Quick Jump:** Swipe left/right on mobile or use the Month Picker modal to jump directly to any month.
+- **Sunday / Monday Start Setting:** Switch between Sunday-start or Monday-start in the profile menu.
+- **Colour Coding & Indicators:**
+  - 🔴 **Red:** Public holiday
+  - 🔵 **Blue:** GP leave period
+  - 🟠 **Orange:** GP combined with a festival (festival day marked with orange badge)
+  - ⚪ **Striped Hatch:** Hostel mess closure
+  - 🟢 **Green Dot:** Tentative (not yet confirmed by the college)
+  - ◪ **Diagonal Split + "AN" Badge:** Afternoon half-day (leave begins after 1:00 PM)
+- **Bottom Sheet Details:** Tap any day to inspect the full weekday, leave range, mess closure timings, and Confirmed vs Tentative status.
+- **Top Summary:** *"This month: 1 GP, 2 holidays"* (or *"GP not announced yet"*).
+- **Year View:** 12-month annual overview for any year (2026 to 2030).
+- **Upcoming Timeline:** Countdown badge (*"In 5 days"*, *"Tomorrow"*, *"Active Now"*).
+- **📝 1-Tap Leave Portal Integration:**
+  - Configured globally via `LEAVE_PORTAL_URL` (`https://ps.bitsathy.ac.in/activity/my-leaves`) in `src/config.js`.
+  - **Sticky "Apply for Leave" Button:** Docked at the bottom of the home screen with a minimum 48px tap target and explanatory note.
+  - **Under "Next leave: ...":** Direct "Apply now" button.
+  - **7-Day Urgent Reminder Banner:** Appears when the next GP leave begins within 7 days.
+  - **Date Bottom Sheet:** "Apply for this GP" button plus a 1-tap **"Copy dates"** button (copies range e.g. `25 Jun 2026 (AN) to 29 Jun 2026` to clipboard for the portal form).
+  - **Upcoming Cards:** Quick "Apply" pill on every GP card.
+  - **Navigation Dock & Profile Menu:** Dedicated "Leave Portal" link item.
+  - Safe external links (`target="_blank" rel="noopener noreferrer"`) ensuring portal login functions natively outside iframes.
+- **Add to Calendar (.ics):** Export all 5 years, any selected year, or a single event to Apple Calendar, Google Calendar, or Outlook.
+- **Reminders:** Built-in Web Notification alert 1 day before leave.
+
+---
+
+## 📝 How to Add or Update GP Leaves Each Year
+
+### Method 1: Using the Built-In Admin Screen (Zero Code)
+1. Sign in with any email listed in `ADMIN_EMAILS` (e.g. `admin@bitsathy.ac.in`).
+2. An **"Announce / Edit GP Leave"** option appears in your profile menu.
+3. Fill in the form:
+   - **Start Date** & **End Date**
+   - **Starts Afternoon (AN Half-Day)** checkbox
+   - Optional festival celebration & date
+   - Optional hostel mess closure window
+4. Click **Publish Confirmed GP Leave**. It saves directly to Firestore and immediately updates for all students!
+
+### Method 2: Editing `data/leaves.json`
+All baseline leave data is stored in [`data/leaves.json`](file:///c:/Users/loginn/OneDrive/Documents/GP%20Callender/data/leaves.json):
+```json
 {
   "type": "GP",
-  "start": "2027-07-23",
-  "startAN": true,           // true if leave starts in afternoon
-  "end": "2027-07-27"
-}
-```
-
-#### C. GP Leave with Festival:
-```javascript
-{
-  "type": "GP",
-  "start": "2027-08-28",
+  "start": "2027-08-20",
   "startAN": true,
-  "end": "2027-09-01",
+  "end": "2027-08-24",
+  "status": "Confirmed",
   "festival": {
     "name": "Milad un Nabi",
-    "date": "2027-08-31"     // specific festival day gets orange highlight
-  }
-}
-```
-
-#### D. GP Leave with Mess Closure:
-```javascript
-{
-  "type": "GP",
-  "start": "2027-11-12",
-  "startAN": true,
-  "end": "2027-11-16",
-  "festival": {
-    "name": "Diwali",
-    "date": "2027-11-14"
+    "date": "2027-08-23"
   },
   "messClosure": {
-    "from": "2027-11-12 Dinner",
-    "to": "2027-11-16 Lunch"
+    "from": "2027-08-20 Dinner",
+    "to": "2027-08-24 Lunch"
   }
 }
 ```
@@ -124,39 +176,25 @@ const BIT_CALENDAR_CONFIG = {
 
 ## 🌐 Free Deployment Guide
 
-You can deploy this app online for free in under 2 minutes so your classmates can access and install it on their phones:
+### Option 1: Firebase Hosting (Recommended)
+```bash
+npm run build
+npm install -g firebase-tools
+firebase login
+firebase init hosting
+# Select your project, set public directory to "dist", configure as single-page app
+firebase deploy
+```
 
-### Option 1: GitHub Pages (100% Free & Recommended)
-1. Create a free repository on [GitHub](https://github.com) named `bit-calendar`.
-2. Push your code:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial BIT Calendar release"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/bit-calendar.git
-   git push -u origin main
-   ```
-3. In your GitHub repository:
-   - Go to **Settings** → **Pages**.
-   - Under **Build and deployment** > **Source**, choose **Deploy from a branch**.
-   - Select Branch: `main` / `/ (root)`, then click **Save**.
-4. In about 1 minute, your site will be live at:
-   `https://<your-username>.github.io/bit-calendar/`
+### Option 2: Netlify (Free & Fastest)
+1. Run `npm run build` locally.
+2. Drag and drop the `dist/` folder into [Netlify Drop](https://app.netlify.com/drop).
+3. In Netlify Site Settings, add your environment variables from `.env`.
+4. Add your Netlify URL into **Firebase Console → Authentication → Settings → Authorized domains**.
 
-### Option 2: Netlify (Drag and Drop in 30 Seconds)
-1. Go to [Netlify Drop](https://app.netlify.com/drop).
-2. Sign in or sign up with GitHub / Email.
-3. Drag the entire project folder (`GP Callender`) and drop it into the Netlify browser window.
-4. Netlify will instantly generate a live HTTPS URL (e.g., `https://bit-holiday-calendar.netlify.app`).
-5. (Optional) In Netlify Site Settings, you can customize the domain name for free!
-
----
-
-## 📱 How Students Install It on Their Phones
-
-- **Android (Chrome):** Open the website, tap the `⋮` menu (or wait for the bottom prompt), and tap **"Install app"** or **"Add to Home screen"**.
-- **iPhone (Safari):** Open the website in Safari, tap the **Share** button (`⎋`), and select **"Add to Home Screen"** (`⊕`).
-
-The app will appear with its official BIT icon on the home screen and work fully offline!
-
+### Option 3: GitHub Pages
+1. Push your repository to GitHub.
+2. Set up GitHub Actions or deploy the `dist/` folder to the `gh-pages` branch.
+3. Add `<username>.github.io` to Firebase Authorized Domains.
+#   G P - C a l l e n d e r  
+ 
