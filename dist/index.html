@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>BIT Holiday Calendar | Bannari Amman Institute of Technology</title>
+  
+  <!-- PWA & Mobile Meta -->
+  <meta name="description" content="Official BIT Holiday & GP Leave Calendar (2026-2030) for Bannari Amman Institute of Technology students. Clean, reliable calendar with college Google sign-in and .ics sync.">
+  <meta name="theme-color" content="#1e3a8a" id="meta-theme-color">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BIT Calendar">
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Instant Theme Execution to Prevent Flash -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('bit_theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        var metaTheme = document.getElementById('meta-theme-color');
+        if (metaTheme) metaTheme.setAttribute('content', theme === 'dark' ? '#0c1220' : '#1e3a8a');
+      } catch(e) {}
+    })();
+  </script>
+  <script type="module" crossorigin src="./assets/index-BeaWJKKa.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/firebase-KJHJkG11.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-Dk2KjMMB.css">
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>

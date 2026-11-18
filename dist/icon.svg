@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c3b82" />
+      <stop offset="50%" stop-color="#124491" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f8fafc" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- App Background Squircle -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Subtle Inner Glow Border -->
+  <rect x="8" y="8" width="496" height="496" rx="104" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="4" />
+
+  <!-- College Monogram Pill -->
+  <g transform="translate(186, 44)">
+    <rect width="140" height="36" rx="18" fill="url(#goldGrad)" opacity="0.95" />
+    <text x="70" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="900" fill="#0c3b82" text-anchor="middle" letter-spacing="3">BIT</text>
+  </g>
+
+  <!-- Calendar Card -->
+  <g filter="url(#shadow)">
+    <!-- Main Calendar Body -->
+    <rect x="76" y="104" width="360" height="344" rx="36" fill="url(#cardGrad)" />
+
+    <!-- Calendar Top Header (Red / Accent) -->
+    <path d="M 76 140 C 76 120 92 104 112 104 L 400 104 C 420 104 436 120 436 140 L 436 196 L 76 196 Z" fill="#dc2626" />
+    
+    <!-- Header Shine -->
+    <path d="M 76 140 C 76 120 92 104 112 104 L 400 104 C 420 104 436 120 436 140 L 436 150 L 76 150 Z" fill="rgba(255,255,255,0.2)" />
+
+    <!-- Calendar Ring Binders -->
+    <rect x="144" y="84" width="24" height="44" rx="12" fill="#e2e8f0" stroke="#0c3b82" stroke-width="4" />
+    <rect x="344" y="84" width="24" height="44" rx="12" fill="#e2e8f0" stroke="#0c3b82" stroke-width="4" />
+
+    <!-- Month / App Title in Calendar Header -->
+    <text x="256" y="162" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">HOLIDAYS &amp; GP</text>
+
+    <!-- Calendar Grid Simulation -->
+    <!-- Row 1: Weekday dots/letters -->
+    <g fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" text-anchor="middle">
+      <text x="120" y="234">S</text>
+      <text x="165" y="234">M</text>
+      <text x="210" y="234">T</text>
+      <text x="256" y="234">W</text>
+      <text x="301" y="234">T</text>
+      <text x="346" y="234">F</text>
+      <text x="391" y="234">S</text>
+    </g>
+
+    <!-- Row 2: Grid items with colored status badges -->
+    <!-- Red holiday badge -->
+    <circle cx="165" cy="285" r="18" fill="#fee2e2" />
+    <circle cx="165" cy="285" r="14" fill="#ef4444" />
+    <text x="165" y="291" font-family="sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">H</text>
+
+    <!-- Blue GP leave badges spanning 3 days -->
+    <rect x="238" y="267" width="126" height="36" rx="18" fill="#2563eb" />
+    <!-- AN diagonal marker on first GP day -->
+    <path d="M 238 285 L 256 267 L 274 267 L 238 303 Z" fill="#60a5fa" opacity="0.8" />
+    <text x="256" y="291" font-family="sans-serif" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">AN</text>
+    <text x="301" y="291" font-family="sans-serif" font-size="15" font-weight="800" fill="#ffffff" text-anchor="middle">GP</text>
+    <text x="346" y="291" font-family="sans-serif" font-size="15" font-weight="800" fill="#ffffff" text-anchor="middle">GP</text>
+
+    <!-- Orange festival badge -->
+    <circle cx="301" cy="365" r="19" fill="#ffedd5" />
+    <circle cx="301" cy="365" r="15" fill="#f97316" />
+    <polygon points="301,354 304,362 312,362 306,367 308,375 301,370 294,375 296,367 290,362 298,362" fill="#ffffff" />
+
+    <!-- Mess closure striped pill badge -->
+    <g transform="translate(120, 347)">
+      <rect width="130" height="36" rx="18" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2" />
+      <text x="65" y="23" font-family="sans-serif" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">MESS INFO</text>
+    </g>
+
+    <!-- Sparkle / Checkmark Pill at bottom -->
+    <g transform="translate(146, 405)">
+      <rect width="220" height="26" rx="13" fill="#e0e7ff" />
+      <text x="110" y="18" font-family="sans-serif" font-size="12" font-weight="800" fill="#1e40af" text-anchor="middle" letter-spacing="1">BIT 2026 – 2027</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,628 @@
+[
+  {
+    "type": "HOLIDAY",
+    "name": "New Year's Day",
+    "date": "2026-01-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Pongal",
+    "date": "2026-01-15",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Thiruvalluvar Day",
+    "date": "2026-01-16",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Republic Day",
+    "date": "2026-01-26",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Thai Poosam",
+    "date": "2026-02-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Ramzan (Id-ul-Fitr)",
+    "date": "2026-03-20",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Good Friday",
+    "date": "2026-04-03",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Tamil New Year",
+    "date": "2026-04-14",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "May Day",
+    "date": "2026-05-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Bakrid",
+    "date": "2026-05-27",
+    "status": "Tentative"
+  },
+
+  {
+    "type": "GP",
+    "start": "2026-06-25",
+    "startAN": true,
+    "end": "2026-06-29",
+    "status": "Confirmed",
+    "festival": {
+      "name": "Muharram",
+      "date": "2026-06-26"
+    }
+  },
+  {
+    "type": "GP",
+    "start": "2026-07-24",
+    "startAN": true,
+    "end": "2026-07-28",
+    "status": "Confirmed"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Independence Day",
+    "date": "2026-08-15",
+    "status": "Confirmed"
+  },
+  {
+    "type": "GP",
+    "start": "2026-08-22",
+    "startAN": true,
+    "end": "2026-08-26",
+    "status": "Confirmed",
+    "festival": {
+      "name": "Milad un Nabi",
+      "date": "2026-08-25"
+    }
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Krishna Jayanthi",
+    "date": "2026-09-04",
+    "status": "Confirmed"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Vinayakar Chathurthi",
+    "date": "2026-09-14",
+    "status": "Confirmed"
+  },
+  {
+    "type": "GP",
+    "start": "2026-09-24",
+    "startAN": true,
+    "end": "2026-09-29",
+    "status": "Confirmed"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Gandhi Jayanthi",
+    "date": "2026-10-02",
+    "status": "Confirmed"
+  },
+  {
+    "type": "GP",
+    "start": "2026-10-17",
+    "startAN": true,
+    "end": "2026-10-21",
+    "status": "Confirmed",
+    "festival": {
+      "name": "Pooja Holidays",
+      "date": "2026-10-19",
+      "endDate": "2026-10-20"
+    }
+  },
+  {
+    "type": "GP",
+    "start": "2026-11-06",
+    "startAN": true,
+    "end": "2026-11-10",
+    "status": "Confirmed",
+    "festival": {
+      "name": "Diwali",
+      "date": "2026-11-08"
+    },
+    "messClosure": {
+      "from": "2026-11-06 Dinner",
+      "to": "2026-11-10 Lunch"
+    }
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Christmas",
+    "date": "2026-12-25",
+    "status": "Confirmed"
+  },
+  {
+    "type": "GP",
+    "start": "2026-12-31",
+    "startAN": true,
+    "end": "2027-01-04",
+    "status": "Confirmed",
+    "festival": {
+      "name": "New Year",
+      "date": "2027-01-01"
+    },
+    "messClosure": {
+      "from": "2026-12-31 Dinner",
+      "to": "2027-01-04 Lunch"
+    }
+  },
+  {
+    "type": "GP",
+    "start": "2027-01-14",
+    "startAN": true,
+    "end": "2027-01-18",
+    "status": "Confirmed",
+    "festival": {
+      "name": "Pongal Holidays"
+    },
+    "messClosure": {
+      "from": "2027-01-14 Dinner",
+      "to": "2027-01-18 Lunch"
+    }
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Thai Poosam",
+    "date": "2027-01-22",
+    "status": "Confirmed"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Republic Day",
+    "date": "2027-01-26",
+    "status": "Confirmed"
+  },
+  {
+    "type": "GP",
+    "start": "2027-02-26",
+    "startAN": true,
+    "end": "2027-03-02",
+    "status": "Confirmed"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Ramzan",
+    "date": "2027-03-11",
+    "status": "Confirmed"
+  },
+  {
+    "type": "GP",
+    "start": "2027-03-25",
+    "startAN": true,
+    "end": "2027-03-29",
+    "status": "Confirmed",
+    "festival": {
+      "name": "Good Friday",
+      "date": "2027-03-26"
+    }
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Tamil New Year",
+    "date": "2027-04-14",
+    "status": "Confirmed"
+  },
+  {
+    "type": "GP",
+    "start": "2027-04-30",
+    "startAN": true,
+    "end": "2027-05-04",
+    "status": "Confirmed",
+    "festival": {
+      "name": "May Day",
+      "date": "2027-05-01"
+    }
+  },
+  {
+    "type": "GP",
+    "start": "2027-05-27",
+    "startAN": true,
+    "end": "2027-05-31",
+    "status": "Confirmed"
+  },
+
+  {
+    "type": "HOLIDAY",
+    "name": "Muharram",
+    "date": "2027-06-16",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Independence Day",
+    "date": "2027-08-15",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Milad un Nabi",
+    "date": "2027-08-15",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Krishna Jayanthi",
+    "date": "2027-08-25",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Vinayakar Chathurthi",
+    "date": "2027-09-04",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Gandhi Jayanthi",
+    "date": "2027-10-02",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Ayutha Pooja / Vijaya Dasami",
+    "date": "2027-10-09",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Diwali",
+    "date": "2027-10-29",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Christmas",
+    "date": "2027-12-25",
+    "status": "Tentative"
+  },
+
+  {
+    "type": "HOLIDAY",
+    "name": "New Year's Day",
+    "date": "2028-01-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Pongal",
+    "date": "2028-01-15",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Republic Day",
+    "date": "2028-01-26",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Thai Poosam",
+    "date": "2028-02-09",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Ramzan (Id-ul-Fitr)",
+    "date": "2028-02-28",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Good Friday",
+    "date": "2028-04-14",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Tamil New Year",
+    "date": "2028-04-14",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "May Day",
+    "date": "2028-05-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Bakrid",
+    "date": "2028-05-05",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Muharram",
+    "date": "2028-06-04",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Milad un Nabi",
+    "date": "2028-08-03",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Krishna Jayanthi",
+    "date": "2028-08-13",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Independence Day",
+    "date": "2028-08-15",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Vinayakar Chathurthi",
+    "date": "2028-08-24",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Pooja Holidays",
+    "date": "2028-09-28",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Gandhi Jayanthi",
+    "date": "2028-10-02",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Diwali",
+    "date": "2028-10-17",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Christmas",
+    "date": "2028-12-25",
+    "status": "Tentative"
+  },
+
+  {
+    "type": "HOLIDAY",
+    "name": "New Year's Day",
+    "date": "2029-01-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Pongal",
+    "date": "2029-01-14",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Republic Day",
+    "date": "2029-01-26",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Thai Poosam",
+    "date": "2029-01-29",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Ramzan (Id-ul-Fitr)",
+    "date": "2029-02-15",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Good Friday",
+    "date": "2029-03-30",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Tamil New Year",
+    "date": "2029-04-14",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Bakrid",
+    "date": "2029-04-24",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "May Day",
+    "date": "2029-05-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Muharram",
+    "date": "2029-05-24",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Milad un Nabi",
+    "date": "2029-07-24",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Independence Day",
+    "date": "2029-08-15",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Krishna Jayanthi",
+    "date": "2029-09-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Vinayakar Chathurthi",
+    "date": "2029-09-12",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Gandhi Jayanthi",
+    "date": "2029-10-02",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Pooja Holidays",
+    "date": "2029-10-16",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Diwali",
+    "date": "2029-11-05",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Christmas",
+    "date": "2029-12-25",
+    "status": "Tentative"
+  },
+
+  {
+    "type": "HOLIDAY",
+    "name": "New Year's Day",
+    "date": "2030-01-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Pongal",
+    "date": "2030-01-14",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Thai Poosam",
+    "date": "2030-01-18",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Republic Day",
+    "date": "2030-01-26",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Ramzan (Id-ul-Fitr)",
+    "date": "2030-02-05",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Tamil New Year",
+    "date": "2030-04-14",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Bakrid",
+    "date": "2030-04-14",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Good Friday",
+    "date": "2030-04-19",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "May Day",
+    "date": "2030-05-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Muharram",
+    "date": "2030-05-14",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Milad un Nabi",
+    "date": "2030-07-13",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Independence Day",
+    "date": "2030-08-15",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Krishna Jayanthi",
+    "date": "2030-08-21",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Vinayakar Chathurthi",
+    "date": "2030-09-01",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Gandhi Jayanthi",
+    "date": "2030-10-02",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Pooja Holidays",
+    "date": "2030-10-06",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Diwali",
+    "date": "2030-10-26",
+    "status": "Tentative"
+  },
+  {
+    "type": "HOLIDAY",
+    "name": "Christmas",
+    "date": "2030-12-25",
+    "status": "Tentative"
+  }
+]
+
