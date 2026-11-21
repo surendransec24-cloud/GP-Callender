@@ -1,10 +1,7 @@
-const CACHE_NAME = 'bit-calendar-v1';
+const CACHE_NAME = 'bit-calendar-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './style.css',
-  './app.js',
-  './data.js',
   './manifest.json',
   './icon.svg',
   './icon-192.png',
@@ -68,4 +65,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
