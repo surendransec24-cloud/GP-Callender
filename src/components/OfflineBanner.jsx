@@ -20,19 +20,18 @@ export default function OfflineBanner() {
   if (!isOffline) return null;
 
   return (
-    <div className="offline-banner" role="status" aria-live="polite">
-      <div className="offline-banner-content">
-        <WifiOff size={16} strokeWidth={1.75} className="offline-icon" />
-        <span className="offline-text">You are currently offline. Viewing cached BIT calendar data.</span>
+    <div className="offline-banner-glass" role="status" aria-live="polite">
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <WifiOff size={15} strokeWidth={2} />
+        <span>You are currently offline. Viewing cached BIT calendar data.</span>
       </div>
       <button 
         type="button" 
-        className="offline-retry-btn" 
         onClick={() => window.location.reload()}
         aria-label="Retry connection"
+        style={{ marginLeft: '12px', background: 'rgba(255,255,255,0.2)', padding: '2px 8px', borderRadius: '9999px', color: 'inherit', fontSize: '11px', fontWeight: 'bold' }}
       >
-        <RefreshCw size={13} strokeWidth={1.75} />
-        <span>Retry</span>
+        Retry
       </button>
     </div>
   );

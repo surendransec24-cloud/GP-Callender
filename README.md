@@ -1,7 +1,7 @@
 # 📅 BIT Holiday Calendar (2026–2030)
 ### Bannari Amman Institute of Technology, Sathyamangalam
 
-A mobile-first Progressive Web App (PWA) built with **React + Vite** for students and faculty of **Bannari Amman Institute of Technology (BIT)**. It replaces static circulars and PDF lists with a phone-native calendar experience (Google Calendar / Apple Calendar / Notion style) covering **every month from January 2026 to December 2030**.
+A mobile-first Progressive Web App (PWA) built with **React + Vite** for students and faculty of **Bannari Amman Institute of Technology (BIT)**. It provides an institutional calendar experience (Apple Calendar / Linear / Notion style) covering **every month from January 2026 to December 2030** with live Google authentication, instant GP leave sync, and hostel mess closure notices.
 
 ---
 
@@ -13,14 +13,18 @@ A mobile-first Progressive Web App (PWA) built with **React + Vite** for student
    ```
 
 2. **Configure environment:**
-   Copy `.env.example` or create `.env` in the root:
+   Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   Fill in your live Firebase project credentials in `.env`:
    ```env
-   VITE_FIREBASE_API_KEY=AIzaSyB3myWIDgmS_Qk6wMR9qdFceytciZclASg
+   VITE_FIREBASE_API_KEY=AIzaSy...
    VITE_FIREBASE_AUTH_DOMAIN=bit-holiday-calendar.firebaseapp.com
    VITE_FIREBASE_PROJECT_ID=bit-holiday-calendar
+   VITE_FIREBASE_APP_ID=1:993671101862:web:ee0bb4bf5ee4e1e229a367
    VITE_FIREBASE_STORAGE_BUCKET=bit-holiday-calendar.firebasestorage.app
    VITE_FIREBASE_MESSAGING_SENDER_ID=993671101862
-   VITE_FIREBASE_APP_ID=1:993671101862:web:ee0bb4bf5ee4e1e229a367
    VITE_ALLOWED_DOMAIN=bitsathy.ac.in
    VITE_ADMIN_EMAILS=admin@bitsathy.ac.in,principal@bitsathy.ac.in,studentcouncil@bitsathy.ac.in
    ```
@@ -29,46 +33,45 @@ A mobile-first Progressive Web App (PWA) built with **React + Vite** for student
    ```bash
    npm run dev
    ```
-   Open **`http://localhost:5173`** in your browser.
+   Open **`http://localhost:5173`** in your browser. (In local dev mode with `import.meta.env.DEV`, evaluation accounts are available for offline UI testing).
 
-4. **Build and preview production build locally:**
+4. **Build and preview production build:**
    ```bash
    npm run build
    npm run preview
    ```
-   The preview server runs under the base path: **`http://localhost:4173/GP-Callender/`**.
+   Preview the production build under the GitHub Pages subpath: **`http://localhost:4173/GP-Callender/`**.
 
 ---
 
-## 🌐 GitHub Pages Deployment Setup
+## 🌐 Production GitHub Pages Deployment Setup
 
-The repository is configured for automated builds and deployment to GitHub Pages at:
+The repository deploys automatically to GitHub Pages at:
 **`https://surendransec24-cloud.github.io/GP-Callender/`**
 
-### Step 1: Enable GitHub Pages with Actions
-1. On GitHub, navigate to your repository **`GP-Callender`**.
-2. Click **Settings** → **Pages** (under Code and automation).
-3. Under **Build and deployment**:
-   - **Source**: Select **`GitHub Actions`** (do not select Deploy from a branch).
-4. The workflow at [`.github/workflows/deploy.yml`](file:///.github/workflows/deploy.yml) will trigger on every push to `main` or `master`.
+In production builds (`npm run build`):
+- Demo and mock evaluation accounts are **completely removed** via dead-code elimination.
+- If Firebase environment variables are missing during build, a clear **Configuration Error** screen is shown instead of falling back to demo mode.
+- Only verified `@bitsathy.ac.in` Google Workspace accounts can sign in.
+- Administrator access is determined strictly by `ADMIN_EMAILS` and server-side Cloud Firestore security rules.
 
-### Step 2: Add GitHub Actions Secrets
-In your GitHub repository, go to **Settings** → **Secrets and variables** → **Actions** and click **New repository secret** for each variable:
+### Step 1: Configure GitHub Actions Secrets
+In your GitHub repository, navigate to **Settings** → **Secrets and variables** → **Actions**, and add the following repository secrets:
 
-| Secret Name | Value |
+| Secret Name | Description / Example |
 |---|---|
-| `VITE_FIREBASE_API_KEY` | Your Firebase API Key |
-| `VITE_FIREBASE_AUTH_DOMAIN` | `bit-holiday-calendar.firebaseapp.com` |
-| `VITE_FIREBASE_PROJECT_ID` | `bit-holiday-calendar` |
-| `VITE_FIREBASE_STORAGE_BUCKET` | `bit-holiday-calendar.firebasestorage.app` |
-| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Your Sender ID (e.g. `993671101862`) |
-| `VITE_FIREBASE_APP_ID` | Your App ID (`1:993671101862:web:...`) |
-| `VITE_ALLOWED_DOMAIN` | `bitsathy.ac.in` |
-| `VITE_ADMIN_EMAILS` | `admin@bitsathy.ac.in,principal@bitsathy.ac.in` |
+| `VITE_FIREBASE_API_KEY` | Firebase Web API Key (from Firebase Console) |
+| `VITE_FIREBASE_AUTH_DOMAIN` | `<project-id>.firebaseapp.com` |
+| `VITE_FIREBASE_PROJECT_ID` | `<project-id>` |
+| `VITE_FIREBASE_APP_ID` | `1:<sender-id>:web:<app-id>` |
+| `VITE_FIREBASE_STORAGE_BUCKET` | `<project-id>.firebasestorage.app` |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Cloud Messaging Sender ID (e.g. `993671101862`) |
+| `VITE_ALLOWED_DOMAIN` | `bitsathy.ac.in` (default) |
+| `VITE_ADMIN_EMAILS` | `admin@bitsathy.ac.in,principal@bitsathy.ac.in,studentcouncil@bitsathy.ac.in` |
 
-### Step 3: Add Authorized Domain to Firebase Console
-Google Sign-In requires your deployment domain to be whitelisted:
-1. Open the [Firebase Console](https://console.firebase.google.com/) and select your project (`bit-holiday-calendar`).
+### Step 2: Authorize Domain in Firebase Console
+Google Sign-In will reject authentication requests from unauthorized domains:
+1. Open the [Firebase Console](https://console.firebase.google.com/) and select your project.
 2. Go to **Authentication** → **Settings** tab → **Authorized domains**.
 3. Click **Add domain** and enter:
    ```
@@ -76,13 +79,17 @@ Google Sign-In requires your deployment domain to be whitelisted:
    ```
 4. Click **Save**.
 
+### Step 3: Enable GitHub Pages with Actions
+1. On GitHub, navigate to **Settings** → **Pages**.
+2. Under **Build and deployment** → **Source**, select **`GitHub Actions`**.
+3. Push to `main` or `master`, or manually trigger the workflow in the **Actions** tab.
+
 ---
 
 ## 🔒 College Authentication & Security Rules
 
 ### Required Sign-In
 - Access is strictly restricted to verified **`@bitsathy.ac.in`** Google Workspace accounts.
-- The entry screen presents the college crest and a **"Sign in with your college Google account"** button. Nothing else is visible until authenticated.
 - The Google Auth Provider is configured with `{ hd: "bitsathy.ac.in", prompt: "select_account" }` to guide Google to show college accounts.
 - **Client-Side Enforcement:** After sign-in, the app verifies that `user.email` ends with `@bitsathy.ac.in` and `user.emailVerified === true`. If a non-college account is selected, it immediately signs the user out and displays:
   > *"Please sign in with your @bitsathy.ac.in email."*

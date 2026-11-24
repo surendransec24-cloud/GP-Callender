@@ -4,6 +4,7 @@ const fs = require('fs');
 
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const OUTPUT_DIR = path.join(__dirname, '..', 'screenshots');
+const APP_URL = 'http://localhost:5173/GP-Callender/';
 
 if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -19,11 +20,13 @@ const VIEWPORTS = [
 
 const THEMES = ['light', 'dark'];
 
-/** Click a nav tab by index — on desktop the dock is CSS-hidden but still clickable via JS */
+/** Click a nav tab by index */
 async function clickNavTab(page, tabIndex) {
   await page.evaluate((idx) => {
     const btns = document.querySelectorAll('.bottom-nav-dock-btn');
-    if (btns[idx]) btns[idx].click();
+    if (btns[idx]) {
+      btns[idx].click();
+    }
   }, tabIndex);
 }
 
@@ -43,37 +46,33 @@ async function run() {
       console.log(`\n=== Capturing for ${vp.name} [${theme}] ===`);
       await page.setViewport({ width: vp.width, height: vp.height, deviceScaleFactor: 2 });
 
-      // Navigate to app
-      await page.goto('http://localhost:4173/', { waitUntil: 'domcontentloaded' });
+      // 1. NAVIGATE & CAPTURE LOGIN SCREEN
+      await page.goto(APP_URL, { waitUntil: 'domcontentloaded' });
       await new Promise(r => setTimeout(r, 600));
 
-      // 1. CAPTURE LOGIN SCREEN
       await page.evaluate((th) => {
-        localStorage.removeItem('bit_calendar_demo_user');
+        if (window.__LOGOUT_TEST_USER__) window.__LOGOUT_TEST_USER__();
         localStorage.setItem('bit_theme', th);
         document.documentElement.setAttribute('data-theme', th);
       }, theme);
-      await page.goto('http://localhost:4173/', { waitUntil: 'domcontentloaded' });
-      await page.waitForSelector('.login-split-page');
-      await new Promise(r => setTimeout(r, 400));
+
+      await page.waitForSelector('.login-glass-page', { timeout: 6000 });
+      await new Promise(r => setTimeout(r, 500));
 
       const loginFile = path.join(OUTPUT_DIR, `login_${vp.name}_${theme}.png`);
       await page.screenshot({ path: loginFile });
       console.log('  Saved:', path.basename(loginFile));
 
-      // 2. SIGN IN AS STUDENT (demo mode button)
-      const studentEvalBtn = await page.$('.student-eval');
-      if (studentEvalBtn) {
-        await studentEvalBtn.click();
-        await page.waitForSelector('.home-view-container', { timeout: 8000 });
-        await new Promise(r => setTimeout(r, 600));
-      }
-
-      // Apply theme
+      // 2. SIGN IN AS STUDENT FOR INTERNAL VIEWS
       await page.evaluate((th) => {
+        if (window.__LOGIN_TEST_USER__) {
+          window.__LOGIN_TEST_USER__('kavitha.cs22@bitsathy.ac.in', 'Kavitha S');
+        }
         document.documentElement.setAttribute('data-theme', th);
       }, theme);
-      await new Promise(r => setTimeout(r, 200));
+
+      await page.waitForSelector('.home-view-container', { timeout: 8000 });
+      await new Promise(r => setTimeout(r, 600));
 
       // 3. CAPTURE HOME
       const homeFile = path.join(OUTPUT_DIR, `home_${vp.name}_${theme}.png`);
@@ -84,7 +83,7 @@ async function run() {
       await clickNavTab(page, 1);
       try {
         await page.waitForSelector('.month-view-wrapper', { timeout: 5000 });
-        await new Promise(r => setTimeout(r, 400));
+        await new Promise(r => setTimeout(r, 500));
         const calFile = path.join(OUTPUT_DIR, `calendar_${vp.name}_${theme}.png`);
         await page.screenshot({ path: calFile });
         console.log('  Saved:', path.basename(calFile));
@@ -94,41 +93,47 @@ async function run() {
         if (gpCell) {
           await gpCell.click();
           await page.waitForSelector('.bottom-sheet-container', { timeout: 4000 });
-          await new Promise(r => setTimeout(r, 400));
+          await new Promise(r => setTimeout(r, 500));
           const sheetFile = path.join(OUTPUT_DIR, `bottom_sheet_${vp.name}_${theme}.png`);
           await page.screenshot({ path: sheetFile });
           console.log('  Saved:', path.basename(sheetFile));
           const closeBtn = await page.$('.sheet-close-btn');
-          if (closeBtn) { await closeBtn.click(); await new Promise(r => setTimeout(r, 300)); }
+          if (closeBtn) {
+            await closeBtn.click();
+            await new Promise(r => setTimeout(r, 300));
+          }
         }
       } catch (e) {
-        console.log('  Calendar selector timeout, skipping.');
+        console.log('  Calendar selector timeout, skipping:', e.message);
       }
 
       // 6. CAPTURE UPCOMING
       await clickNavTab(page, 2);
       try {
         await page.waitForSelector('.upcoming-timeline-container', { timeout: 5000 });
-        await new Promise(r => setTimeout(r, 400));
+        await new Promise(r => setTimeout(r, 500));
         const upcomingFile = path.join(OUTPUT_DIR, `upcoming_${vp.name}_${theme}.png`);
         await page.screenshot({ path: upcomingFile });
         console.log('  Saved:', path.basename(upcomingFile));
       } catch (e) {
-        console.log('  Upcoming selector timeout, skipping.');
+        console.log('  Upcoming selector timeout, skipping:', e.message);
       }
 
       // 7. PROFILE SHEET
       await clickNavTab(page, 3);
       try {
         await page.waitForSelector('.profile-sheet-card', { timeout: 4000 });
-        await new Promise(r => setTimeout(r, 300));
+        await new Promise(r => setTimeout(r, 400));
         const profileFile = path.join(OUTPUT_DIR, `profile_${vp.name}_${theme}.png`);
         await page.screenshot({ path: profileFile });
         console.log('  Saved:', path.basename(profileFile));
         const closeProfileBtn = await page.$('.profile-sheet-card .sheet-close-btn');
-        if (closeProfileBtn) { await closeProfileBtn.click(); await new Promise(r => setTimeout(r, 200)); }
+        if (closeProfileBtn) {
+          await closeProfileBtn.click();
+          await new Promise(r => setTimeout(r, 200));
+        }
       } catch (e) {
-        console.log('  Profile sheet selector timeout, skipping.');
+        console.log('  Profile sheet selector timeout, skipping:', e.message);
       }
 
       // Reset to home for next iteration

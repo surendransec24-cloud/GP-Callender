@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useAuth } from './context/AuthContext';
 import LoginScreen from './components/LoginScreen';
+import ConfigErrorScreen from './components/ConfigErrorScreen';
 import Header from './components/Header';
+import GlassBackground from './components/GlassBackground';
 import HomeView from './components/HomeView';
 import MonthView from './components/MonthView';
 import UpcomingView from './components/UpcomingView';
@@ -35,7 +37,7 @@ const YearView = React.lazy(() => import('./components/YearView'));
 const AdminModal = React.lazy(() => import('./components/AdminModal'));
 
 export default function App() {
-  const { currentUser, loading: authLoading } = useAuth();
+  const { currentUser, loading: authLoading, isFirebaseConfigured } = useAuth();
 
   // Leaves Data state
   const [leaves, setLeaves] = useState([]);
@@ -197,8 +199,12 @@ export default function App() {
     );
   }
 
-  // First Screen: Login required. Nothing else visible until signed in
+  // First Screen: Show Configuration Error in production if Firebase secrets are missing,
+  // or show LoginScreen with real Google authentication
   if (!currentUser) {
+    if (!isFirebaseConfigured && !import.meta.env.DEV) {
+      return <ConfigErrorScreen />;
+    }
     return <LoginScreen />;
   }
 
@@ -207,6 +213,9 @@ export default function App() {
 
   return (
     <div className="app-viewport">
+      {/* Fixed Ambient Glass Background with Drifting Orbs */}
+      <GlassBackground />
+
       {/* Offline Alert Strip if network drops */}
       <OfflineBanner />
 
